@@ -59,6 +59,7 @@
     let acrossDownButton = document.getElementById("across-down");
     let clueOutput = document.getElementById("clue");
     let replace = false;
+    let timeout;
 
     across_clues = {
         "1": "Tangy cooking ingredient in Indian cuisine",
@@ -787,7 +788,10 @@
     }
 
     clueNumberInput.oninput = function (ev) {
-        setTimeout(() => {clueNumberInput.select()}, 3000);
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(() => {clueNumberInput.select()}, 2500);
         update();
     }
 
@@ -795,7 +799,7 @@
     function update() {
         let clueNumber = clueNumberInput.value;
         let direction = acrossDownButton.innerText
-        let clue = undefined;
+        let clue;
 
         console.log(clueNumber)
 
