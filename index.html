@@ -41,11 +41,16 @@
         width: 100%;
         margin: 5px auto;
     }
+    
     #clue {
         margin: 100px auto;
         width: 80%;
         background-color: #cfe2ff;
         padding: 10px;
+    }
+
+    #clue-number::selection {
+        background-color: #dff2ff;
     }
 </style>
 
@@ -53,6 +58,7 @@
     let clueNumberInput = document.getElementById("clue-number");
     let acrossDownButton = document.getElementById("across-down");
     let clueOutput = document.getElementById("clue");
+    let replace = false;
 
     across_clues = {
         "1": "Tangy cooking ingredient in Indian cuisine",
@@ -780,7 +786,10 @@
         "578": "Catchy song, in modern vernacular"
     }
 
-    clueNumberInput.oninput = update;
+    clueNumberInput.oninput = function (ev) {
+        setTimeout(() => {clueNumberInput.select()}, 1000);
+        update();
+    }
 
 
     function update() {
