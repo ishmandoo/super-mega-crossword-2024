@@ -26,8 +26,8 @@
     <footer>
       <div class="footer">
         <input type="number" id="clue-number-input" id="" placeholder="Clue Number" value="1">
-        <button id="last-button">&larr;</button>
-        <button id="next-button">&rarr;</button>
+        <button id="last-button"><span id="last-number"></span>&larr;</button>
+        <button id="next-button">&rarr;<span id="next-number"></span></button>
       </div>
       <div class="footer">
         <button id="across-down-button" class="across">Across</button>
@@ -43,7 +43,7 @@
     height: 100%;
     overflow: hidden;
     font-size: larger;
-    font-family:'Courier New', Courier, monospace;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
   }
 
   .across {
@@ -88,6 +88,7 @@
   }
 
   #clue-header {
+    opacity: .65;
     font-size: medium;
   }
 
@@ -109,6 +110,7 @@
   #clue-number-input {
     flex: 1;
     height: 50px;
+    padding-left: 10px;
   }
 
   #clue-number-input::selection {
@@ -126,6 +128,10 @@
   #last-button {
     width: 56px;
     height: 56px;
+  }
+
+  #next-number, #last-number {
+    font-size: small;
   }
 
   #clue-number-input,
@@ -152,7 +158,9 @@
   let clueNumberInput = document.getElementById("clue-number-input");
   let acrossDownButton = document.getElementById("across-down-button");
   let nextButton = document.getElementById("next-button");
+  let nextNumber = document.getElementById("next-number");
   let lastButton = document.getElementById("last-button");
+  let lastNumber = document.getElementById("last-number");
   let clueHeaderOutput = document.getElementById("clue-header");
   let clueBodyOutput = document.getElementById("clue-body");
   let clueOutput = document.getElementById("clue");
@@ -946,16 +954,22 @@
     let direction = acrossDownButton.innerText;
     let clue = getClueTable()[clueNumber]
 
-    if (getNextKey()) {
-      nextButton.classList.remove("disabled")
+    let next = getNextKey()
+    if (next) {
+      nextButton.disabled = false;
+      nextNumber.innerText = next
     } else {
-      nextButton.classList.add("disabled")
+      nextButton.disabled = true;
+      nextNumber.innerText = ""
     }
 
-    if (getLastKey()) {
-      lastButton.classList.remove("disabled")
+    let last = getLastKey()
+    if (last) {
+      lastButton.disabled = false;
+      lastNumber.innerText = last
     } else {
-      lastButton.classList.add("disabled")
+      lastButton.disabled = true;
+      lastNumber.innerText = ""
     }
 
     clueHeaderOutput.innerText = `${clueNumber} ${direction}`;
