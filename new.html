@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=overlays-content">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
   <link rel="icon" type="image/x-icon" href="crossword_icon.png">
   <title>One Page App</title>
 
@@ -42,7 +42,7 @@
     padding: 0;
     height: 100%;
     overflow: hidden;
-    font-size: larger;
+    font-size: large;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
   }
 
@@ -893,7 +893,7 @@
   }
 
   document.onfocus = function () {
-    clueNumberInput.select();
+    focusSelectInput();
   }
 
   clueNumberInput.oninput = function (ev) {
@@ -911,13 +911,19 @@
   nextButton.onclick = function () {
     clueNumberInput.value = getNextKey();
     update();
-    clueNumberInput.select();
+    focusSelectInput();
   }
 
   lastButton.onclick = function () {
     clueNumberInput.value = getLastKey();
     update();
-    clueNumberInput.select();
+    focusSelectInput();
+  }
+
+  function focusSelectInput() {
+    if (document.activeElement !== clueNumberInput) {
+      clueNumberInput.select();
+    }
   }
 
   function getClueTable() {
@@ -974,10 +980,10 @@
 
     clueHeaderOutput.innerText = `${clueNumber} ${direction}`;
     clueBodyOutput.innerText = clue ? clue : `Not a clue`;
-    clueNumberInput.focus();
+    focusSelectInput();
   }
   update()
-  clueNumberInput.select();
+  focusSelectInput();
 
   acrossDownButton.onclick = function () {
     if (acrossDownButton.innerText == "Across") {
