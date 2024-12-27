@@ -156,6 +156,9 @@
 
 <script>
   let clueNumberInput = document.getElementById("clue-number-input");
+  clueNumberInput.setAttribute('autocomplete', 'off');
+  clueNumberInput.setAttribute('inputmode', 'none'); // As a backup for Android-specific keyboards
+
   let acrossDownButton = document.getElementById("across-down-button");
   let nextButton = document.getElementById("next-button");
   let nextNumber = document.getElementById("next-number");
