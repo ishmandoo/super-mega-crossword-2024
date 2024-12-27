@@ -982,16 +982,12 @@
   acrossDownButton.onclick = function () {
     if (acrossDownButton.innerText == "Across") {
       acrossDownButton.innerText = "Down"
-      clueOutput.classList.remove("across")
-      clueOutput.classList.add("down")
-      acrossDownButton.classList.remove("across")
-      acrossDownButton.classList.add("down")
+      clueOutput.classList.replace("across", "down")
+      acrossDownButton.classList.replace("across", "down")
     } else {
       acrossDownButton.innerText = "Across"
-      clueOutput.classList.remove("down")
-      clueOutput.classList.add("across")
-      acrossDownButton.classList.remove("down")
-      acrossDownButton.classList.add("across")
+      clueOutput.classList.replace("down", "across")
+      acrossDownButton.classList.replace("down", "across")
     }
     update();
   }
