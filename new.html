@@ -25,7 +25,7 @@
     </main>
     <footer>
       <div class="footer">
-        <input type="number" id="clue-number-input" id="" placeholder="Clue Number" value="1">
+        <input type="number" id="clue-number-input" id="" placeholder="Clue Number" value="1" autocomplete="off">
         <button id="last-button"><span id="last-number"></span>&larr;</button>
         <button id="next-button">&rarr;<span id="next-number"></span></button>
       </div>
@@ -139,6 +139,7 @@
   #last-button {
     margin: 2px;
     font: inherit;
+    font-size: 24pt;
   }
 
   /* Chrome, Safari, Edge, Opera */
@@ -893,7 +894,7 @@
   }
 
   document.onfocus = function () {
-    focusSelectInput();
+    clueNumberInput.select();
   }
 
   clueNumberInput.oninput = function (ev) {
@@ -911,19 +912,13 @@
   nextButton.onclick = function () {
     clueNumberInput.value = getNextKey();
     update();
-    focusSelectInput();
+    clueNumberInput.select();
   }
 
   lastButton.onclick = function () {
     clueNumberInput.value = getLastKey();
     update();
-    focusSelectInput();
-  }
-
-  function focusSelectInput() {
-    if (document.activeElement !== clueNumberInput) {
-      clueNumberInput.select();
-    }
+    clueNumberInput.select();
   }
 
   function getClueTable() {
@@ -980,10 +975,10 @@
 
     clueHeaderOutput.innerText = `${clueNumber} ${direction}`;
     clueBodyOutput.innerText = clue ? clue : `Not a clue`;
-    focusSelectInput();
+    clueNumberInput.focus();
   }
   update()
-  focusSelectInput();
+  clueNumberInput.select();
 
   acrossDownButton.onclick = function () {
     if (acrossDownButton.innerText == "Across") {
